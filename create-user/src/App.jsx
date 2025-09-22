@@ -22,11 +22,19 @@ function App() {
   }
 
   // close Modal
-
   const closeModal = (ev) =>  {
     if(ev.target.className==="overlay") setShowModal(false)
     if(ev.key ==="Escape")  setShowModal(false) 
   }
+
+    //addUser
+
+    const addUser = (user) => {
+      setUsers((prev) => {
+        return[...prev, user]
+      })
+      setShowModal(false)
+    }
 
   return (
     <div onClick={closeModal} onKeyDown={closeModal} className='App'> 
@@ -37,7 +45,7 @@ function App() {
         </div>
         <UserList users={users} delete = {deleteUser} ></UserList>
       </main>
-      {showModal && <NewUserForm></NewUserForm>}
+      {showModal && <NewUserForm addUser={addUser}></NewUserForm>}
       <button onClick={() => setShowModal(true)} className='create-user' >Create User</button>
     <Footer></Footer>
     </div>
